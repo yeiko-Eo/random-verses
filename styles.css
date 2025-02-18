@@ -1,0 +1,88 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+    color: #F8F3D9;
+}
+
+.container {
+    background-color: #F8F3D9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+h1{
+    font-size: 3.5rem;
+    background-color: #504B38;
+    border: 3px solid black;
+    border-radius: 3px;
+    margin-bottom: 1.2rem;
+    padding: 0 0.5rem;
+    animation-duration: 3s;
+    animation-name: slide-right;
+    animation-iteration-count: 1;
+    box-shadow: 7px 10px 10px 2px grey;
+}
+
+p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation-duration: 3s;
+    animation-name: slide-left;
+    animation-iteration-count: 1;
+}
+
+button{
+    animation-duration: 3s;
+    animation-iteration-count: 1;
+    animation-name: slide-down;
+}
+
+@keyframes slide-down{
+    from{
+        margin-top: -90%;
+    }
+    to{
+        margin-top: 0%;
+    }
+}
+
+@keyframes slide-right{
+    from{
+        font-size: x-small;
+        margin-left: -90%;
+    }
+    to{
+        margin-left: 0%;
+    }
+    
+}
+
+@keyframes slide-left {
+    from {
+        margin-left: 90%;
+    }
+
+    to {
+        margin-left: 0%;
+    }
+}
+
+p, button{
+    box-shadow: 7px 10px 10px 2px grey;
+    padding: 10px;
+    border: 3px solid black;
+    background-color: #504B38;
+    color: #F8F3D9;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    margin-bottom: 1.2rem;
+}
+
+button:hover{
+    background-color: #F8F3D9;
+    color: #504B38;
+}
