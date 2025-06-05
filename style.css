@@ -1,90 +1,122 @@
-/* Style for the body element */
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Set font family */
-  background: linear-gradient(to right, #dbeafe, #f0fdfa); /* Gradient background */
-  display: flex; /* Use flexbox for centering */
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  height: 100vh; /* Full viewport height */
-  margin: 0; /* Remove default margin */
-  animation: fadeIn 1s ease-in; /* Apply fade-in animation */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(120deg, #dbeafe, #f0fdfa 70%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  animation: fadeIn 1s ease-in;
+  /* Subtle background animation */
+  background-size: 200% 200%;
+  animation: fadeIn 1s ease-in, bgMove 8s ease-in-out infinite alternate;
 }
 
-/* Keyframes for fade-in animation */
+@keyframes bgMove {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
 @keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.95); } /* Start with reduced opacity and scale */
-  to { opacity: 1; transform: scale(1); } /* End with full opacity and scale */
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
 }
 
-/* Style for the container */
 .container {
-  background: white; /* White background */
-  padding: 40px; /* Padding inside the container */
-  border-radius: 20px; /* Rounded corners */
-  text-align: center; /* Center text */
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15); /* Add shadow for depth */
-  transition: transform 0.3s ease; /* Smooth scaling transition */
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s cubic-bezier(.25,.8,.25,1), box-shadow 0.3s;
+  /* Pop-in animation */
+  animation: popIn 0.7s cubic-bezier(.25,.8,.25,1);
 }
 
-/* Scale the container slightly on hover */
+@keyframes popIn {
+  0% { transform: scale(0.92) translateY(30px); opacity: 0; }
+  80% { transform: scale(1.03) translateY(-8px); opacity: 1; }
+  100% { transform: scale(1) translateY(0); }
+}
+
 .container:hover {
-  transform: scale(1.02);
+  transform: scale(1.02) rotate(-1deg);
+  box-shadow: 0 12px 32px rgba(37, 99, 235, 0.18);
 }
 
-/* Style for the main heading */
 h1 {
-  margin-bottom: 25px; /* Space below the heading */
-  color: #1e40af; /* Blue color */
-  animation: slideDown 0.8s ease; /* Apply slide-down animation */
+  margin-bottom: 25px;
+  color: #1e40af;
+  animation: slideDown 0.8s cubic-bezier(.25,.8,.25,1);
+  letter-spacing: 1px;
+  /* Text shadow for glow effect */
+  text-shadow: 0 2px 8px #dbeafe88;
 }
 
-/* Change heading color on hover */
 h1:hover {
   color: aqua;
+  text-shadow: 0 0 16px #67e8f9, 0 2px 8px #dbeafe88;
+  animation: h1Pulse 0.5s;
 }
 
-/* Keyframes for slide-down animation */
+@keyframes h1Pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.07); }
+  100% { transform: scale(1); }
+}
+
 @keyframes slideDown {
-  from { transform: translateY(-20px); opacity: 0; } /* Start above with reduced opacity */
-  to { transform: translateY(0); opacity: 1; } /* End in place with full opacity */
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
-/* Style for the verse text */
 #verse {
-  font-size: 18px; /* Font size */
-  color: #334155; /* Dark gray color */
-  margin-bottom: 30px; /* Space below the text */
-  min-height: 60px; /* Minimum height for consistent layout */
-  opacity: 0; /* Initially hidden */
-  animation: none; /* No animation by default */
+  font-size: 18px;
+  color: #334155;
+  margin-bottom: 30px;
+  min-height: 60px;
+  opacity: 0;
+  animation: none;
+  transition: color 0.3s;
 }
 
-/* Show animation for the verse when the "show" class is added */
 #verse.show {
-  animation: fadeText 0.5s forwards; /* Fade-in and slide-up animation */
+  animation: fadeText 0.5s forwards, verseGlow 1.2s;
 }
 
-/* Keyframes for fading and sliding text */
 @keyframes fadeText {
-  from { opacity: 0; transform: translateY(10px); } /* Start below with reduced opacity */
-  to { opacity: 1; transform: translateY(0); } /* End in place with full opacity */
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* Style for the button */
+@keyframes verseGlow {
+  0% { text-shadow: 0 0 0 #2563eb44; }
+  50% { text-shadow: 0 0 16px #2563eb44; }
+  100% { text-shadow: 0 0 0 #2563eb44; }
+}
+
 button {
-  padding: 12px 24px; /* Padding inside the button */
-  font-size: 16px; /* Font size */
-  cursor: pointer; /* Pointer cursor on hover */
-  background-color: #2563eb; /* Blue background */
-  color: white; /* White text */
-  border: none; /* Remove border */
-  border-radius: 10px; /* Rounded corners */
-  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effects */
-  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3); /* Add shadow for depth */
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+  /* Button pop-in */
+  animation: btnPop 0.7s 0.2s backwards;
 }
 
-/* Change button background color and scale on hover */
+@keyframes btnPop {
+  0% { transform: scale(0.7); opacity: 0; }
+  80% { transform: scale(1.08); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
 button:hover {
-  background-color: #1d4ed8; /* Darker blue */
-  transform: scale(1.05); /* Slightly enlarge */
+  background-color: #1d4ed8;
+  transform: scale(1.08) rotate(1deg);
+  box-shadow: 0 8px 20px #2563eb44;
 }
