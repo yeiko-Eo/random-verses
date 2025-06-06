@@ -13,16 +13,48 @@ fetch('verses.json')
 function getRandomVerse() {
     if (verses.length === 0) {
         document.getElementById("verse").textContent = "No verses found.";
-        return;
+        return; // If there's no verse
     }
 
-    // Select a random one and save it
+    // Select a random verse
     currentVerse = verses[Math.floor(Math.random() * verses.length)];
-
-    // Show only the verse
     document.getElementById("verse").textContent = currentVerse.verse;
     document.getElementById("verse").classList.add("show");
+
+    generateOptions(currentVerse);
 }
+
+function generateOptions(correctVerse) {
+    const optionsPanel = document.getElementById("options-panel");
+    optionsPanel.innerHTML = ""; // Clear previous options
+
+    // Get two incorrect citations
+    const incorrectOptions = verses
+        .filter(v => v.cite !== correctVerse.cite)
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 2);
+
+    // Combine and shuffle options
+    const allOptions = [...incorrectOptions, correctVerse]
+        .sort(() => 0.5 - Math.random());
+
+    allOptions.forEach(option => {
+        const btn = document.createElement("button");
+        btn.textContent = option.cite;
+        btn.style.margin = "5px";
+
+        btn.onclick = () => {
+            if (option.cite === correctVerse.cite) {
+                alert("✅ Ve' que sabe");
+            } else {
+                alert("❌ Uhmm mejor nadota dice Don");
+            }
+        };
+
+        optionsPanel.appendChild(btn);
+    });
+}
+
 
 // Function to show the citation of the current verse
 function getVerseCite() {
